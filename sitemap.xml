@@ -9,23 +9,33 @@
 
 <url>
   <loc>https://xn--schlsseldienst-zrich-24-fpcm.ch/</loc>
-  <lastmod>2023-03-16T20:26:39+00:00</lastmod>
+  <lastmod>2023-12-10T20:29:54+00:00</lastmod>
   <priority>1.00</priority>
 </url>
 <url>
+  <loc>https://xn--schlsseldienst-zrich-24-fpcm.ch/blog/</loc>
+  <lastmod>2023-12-10T20:29:54+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
   <loc>https://xn--schlsseldienst-zrich-24-fpcm.ch/impressum/</loc>
-  <lastmod>2023-03-16T20:26:39+00:00</lastmod>
+  <lastmod>2023-12-10T20:29:54+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
   <loc>https://xn--schlsseldienst-zrich-24-fpcm.ch/datenschutz/</loc>
-  <lastmod>2023-03-16T20:26:39+00:00</lastmod>
+  <lastmod>2023-12-10T20:29:54+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
   <loc>https://xn--schlsseldienst-zrich-24-fpcm.ch/credits/</loc>
-  <lastmod>2023-03-16T20:26:39+00:00</lastmod>
+  <lastmod>2023-12-10T20:29:54+00:00</lastmod>
   <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://xn--schlsseldienst-zrich-24-fpcm.ch/schluesseldienst-zuerich-preise/</loc>
+  <lastmod>2023-12-10T20:29:54+00:00</lastmod>
+  <priority>0.64</priority>
 </url>
 
 
