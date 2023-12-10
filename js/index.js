@@ -1,0 +1,41 @@
+window.slideUp=(target,duration=250)=>{target.style.transitionProperty='height, opacity';target.style.transitionDuration=duration+'ms';target.style.boxSizing='border-box';target.style.height=target.offsetHeight+'px';target.offsetHeight;target.style.overflow='hidden';target.style.height=0;target.style.opacity=0;window.setTimeout(()=>{target.style.removeProperty('display');target.style.removeProperty('height');target.style.removeProperty('opacity');target.style.removeProperty('overflow');target.style.removeProperty('transition-duration');target.style.removeProperty('transition-property')},duration)};window.slideDown=(target,duration=250)=>{target.style.removeProperty('display');let display=window.getComputedStyle(target).display;if(display==='none')display='block';target.style.opacity=0;target.style.display=display;let height=target.offsetHeight;target.style.overflow='hidden';target.style.height=0;target.offsetHeight;target.style.boxSizing='border-box';target.style.transitionProperty='height, opacity';target.style.transitionDuration=duration+'ms';target.style.height=height+'px';target.style.removeProperty('opacity');window.setTimeout(()=>{target.style.removeProperty('height');target.style.removeProperty('overflow');target.style.removeProperty('transition-duration');target.style.removeProperty('transition-property')},duration)};window.slideToggle=(target,duration=250)=>{if(window.getComputedStyle(target).display==='none'){return window.slideDown(target,duration)}else{return window.slideUp(target,duration)}};function createSVG(id){let svgElem=document.createElementNS('http://www.w3.org/2000/svg','svg'),useElem=document.createElementNS('http://www.w3.org/2000/svg','use')
+useElem.setAttributeNS('http://www.w3.org/1999/xlink','href','#'+id);svgElem.appendChild(useElem)
+svgElem.classList.add(id)
+return svgElem}
+document.querySelectorAll('.rank-math-block').forEach(block=>{block.querySelectorAll('.rank-math-list-item').forEach(item=>{let question=item.querySelector('.rank-math-question')
+question.prepend(createSVG('icon-question'))
+question.append(createSVG('icon-collapse'))
+question.addEventListener('click',e=>{item.classList.toggle('open')
+window.slideToggle(question.nextElementSibling);if(item.classList.contains('open')){block.querySelectorAll('.rank-math-list-item.open').forEach(active=>{if(item===active){return}})}})})})
+document.querySelectorAll('a[href^="#"]').forEach(elem=>{elem.addEventListener('click',e=>{e.preventDefault()
+document.querySelector(elem.getAttribute('href')).scrollIntoView({behavior:'smooth'})})})
+const burger=document.querySelector('#header nav .burger')
+const menu=document.querySelector('#header nav .menu-header-container')
+burger.addEventListener('click',e=>{e.preventDefault()
+burger.classList.toggle('active')
+menu.classList.toggle('open')})
+document.querySelectorAll('picture.lazy-image').forEach(elem=>{const rect=elem.getBoundingClientRect();const hidden=rect.width===0&&rect.height===0;if(hidden===!0)
+return;elem.childNodes.forEach(childElem=>{if(childElem.nodeName==='SOURCE'){childElem.setAttribute('srcset',childElem.getAttribute('data-srcset'))}
+if(childElem.nodeName==='IMG'){childElem.setAttribute('src',childElem.getAttribute('data-src'))}})});document.querySelectorAll('img.lazy-image').forEach(elem=>{const rect=elem.getBoundingClientRect();const hidden=rect.width===0&&rect.height===0;if(hidden===!0)
+return;elem.setAttribute('src',elem.getAttribute('data-src'))});let swiper_loaded=!1;let map_loaded=!1;let mapboxClient;function loadSwiper(){if(swiper_loaded===!0)
+return;swiper_loaded=!0;loadCSS('https://cdnjs.cloudflare.com/ajax/libs/Swiper/5.4.5/css/swiper.min.css',document.body);loadJS('https://cdnjs.cloudflare.com/ajax/libs/Swiper/5.4.5/js/swiper.min.js',function(){document.querySelectorAll('.wp-block-sdleads-testimonials').forEach(elem=>{let swiper=new Swiper(elem.querySelector('.swiper-container'),{slidesPerView:1,spaceBetween:32,pagination:{el:elem.querySelector('.swiper-pagination'),type:'bullets',clickable:!0},breakpoints:{768:{slidesPerView:2},992:{slidesPerView:3}}})});document.querySelectorAll('.wp-block-sdleads-post-slider').forEach(elem=>{let swiper=new Swiper(elem.querySelector('.swiper-container'),{slidesPerView:1,spaceBetween:32,autoHeight:!0,navigation:{nextEl:elem.querySelector('.next'),prevEl:elem.querySelector('.prev')},breakpoints:{768:{slidesPerView:2},992:{slidesPerView:3},1200:{slidesPerView:4}}})});document.querySelectorAll('.wp-block-sdleads-slider').forEach(elem=>{let swiperFirst=new Swiper(elem.querySelector('.swiper-container.first'),{effect:'fade',autoHeight:!0,navigation:{nextEl:elem.querySelector('.next'),prevEl:elem.querySelector('.prev')}});swiperFirst.on('slideChange',function(){let active=swiperFirst.activeIndex+1
+elem.querySelector('.pager div span').textContent=active});let swiperSecond=new Swiper(elem.querySelector('.swiper-container.second'),{effect:'fade',autoHeight:!0});swiperFirst.controller.control=swiperSecond;swiperSecond.controller.control=swiperFirst})},document.body)}
+function loadMap(){if(map_loaded===!0)
+return;map_loaded=!0;loadCSS('https://api.mapbox.com/mapbox-gl-js/v1.4.1/mapbox-gl.css',document.body);loadJS('https://api.mapbox.com/mapbox-gl-js/v1.4.1/mapbox-gl.js',function(){loadJS('https://unpkg.com/@mapbox/mapbox-sdk/umd/mapbox-sdk.min.js',function(){mapboxgl.accessToken='pk.eyJ1IjoiYWFyb25pa2VyIiwiYSI6ImNrNHhpbDR2aTAxODczbHQxODUxOTZzM2gifQ.WZXYAJ6ObQows7FPC5NTlQ';mapboxClient=mapboxSdk({accessToken:mapboxgl.accessToken});document.querySelectorAll('.wp-block-sdleads-locations').forEach(elem=>{let containerId=elem.getAttribute('data-id');const[lat,lng]=elem.getAttribute('data-center').split(',');let markerArray=[];let map=new mapboxgl.Map({container:containerId,interactive:!1,center:[lat,lng],zoom:elem.getAttribute('data-zoom'),style:"mapbox://styles/mapbox/light-v10"}).addControl(new mapboxgl.NavigationControl());window.mapLocations[containerId].forEach(function(coords){markerArray.push(new mapboxgl.Marker({color:getComputedStyle(document.body).getPropertyValue("--c-primary")}).setLngLat(coords).addTo(map))});elem.querySelectorAll('.list ul li').forEach(function(li,index,array){let fill,marker=elem.querySelectorAll('.mapboxgl-marker')[index],markerSvg=marker.querySelector('svg > g > g:nth-child(2)');markerSvg.style.transition='fill .25s'
+li.addEventListener('mouseenter',e=>{fill=markerSvg.style.fill
+markerSvg.style.fill=getComputedStyle(document.body).getPropertyValue('--c-success')
+marker.style.zIndex=1})
+li.addEventListener('mouseleave',e=>{markerSvg.style.fill=fill
+marker.style.zIndex='auto'})})
+elem.querySelectorAll('.mapboxgl-marker').forEach(function(marker,index,array){let fill,li=elem.querySelectorAll('.list ul li')[index],markerSvg=marker.querySelector('svg > g > g:nth-child(2)');markerSvg.style.transition='fill .25s'
+marker.addEventListener('mouseenter',e=>{fill=markerSvg.style.fill
+markerSvg.style.fill=getComputedStyle(document.body).getPropertyValue('--c-success')
+marker.style.zIndex=1
+li.classList.add('hover')})
+marker.addEventListener('mouseleave',e=>{markerSvg.style.fill=fill
+marker.style.zIndex='auto'
+li.classList.remove('hover')})})})},document.body)},document.body)}
+document.addEventListener('scroll',function(){document.querySelectorAll('.swiper-container').forEach(elem=>{loadSwiper()});document.querySelectorAll('.wp-block-sdleads-locations').forEach(elem=>{loadMap()})});function loadJS(url,implementationCode,location){const scriptTag=document.createElement('script');scriptTag.src=url;scriptTag.onload=implementationCode;scriptTag.onreadystatechange=implementationCode;location.appendChild(scriptTag)}
+function loadCSS(url,location){const scriptTag=document.createElement('link');scriptTag.rel='stylesheet';scriptTag.href=url;location.appendChild(scriptTag)}
+function elementInViewport(el){let top=el.offsetTop;let left=el.offsetLeft;let width=el.offsetWidth;let height=el.offsetHeight;while(el.offsetParent){el=el.offsetParent;top+=el.offsetTop;left+=el.offsetLeft}
+return(top>=window.pageYOffset&&left>=window.pageXOffset&&(top+height)<=(window.pageYOffset+window.innerHeight)&&(left+width)<=(window.pageXOffset+window.innerWidth))}
